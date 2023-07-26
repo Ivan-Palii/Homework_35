@@ -2,7 +2,7 @@
 
 /*
 * Завдання:
-
+*/
 
 //1. Перевірка на парність числа. Напишіть функцію isEven,
 // яка приймає число, яке вводить користувач,
@@ -12,7 +12,9 @@
 
 /*function isEven(number) {
 	return new Promise((resolve, reject) => {
-		number % 2 === 0 ? resolve('Це парне число') : reject("Помилка, число не парне")
+		setTimeout(()=>{
+			number % 2 === 0 ? resolve('Це парне число') : reject("Помилка, число не парне")
+		}, 1000)
 	})
 }
 
@@ -45,28 +47,21 @@ isEven(+prompt("Input number"))
 // Успішне виконання повинно повертати "Успіх", а невдачу - "Помилка".
 
 
-/*const promise = new Promise((resolve, reject) => {
-	successRate(0, 100) > 30 ? resolve("Success") : reject("Error")
-})
-promise.then(data => console.log(data)).catch(err => console.log(err))*/
-
-/*
-function successRate(min, max) { // min and max included
-	return Math.floor(Math.random() * (max - min + 1) + min)
-}
-
-function randomSuccessPromise() {
+/*function randomSuccessPromise() {
 	return new Promise((resolve, reject) => {
-		successRate(0, 100) > 30 ? resolve("Success") : reject("Error")
+		Math.random() > 0.3 ? resolve("Success") : reject("Error")
 	})
 }
 
 let successRateResult = 0
-for (let i = 0; i < 100; i++) {
+const TRY_NUMBER = 1000
+
+for (let i = 0; i < TRY_NUMBER; i++) {
 	randomSuccessPromise()
 		.then(() => successRateResult++)
 		.catch(err => console.log(err))
-		.finally(() => console.log(successRateResult / 100))
+		.finally(() =>
+			console.log(`Success rate: ${((successRateResult / TRY_NUMBER) * 100).toFixed(1)}%`))
 }*/
 
 
@@ -77,39 +72,55 @@ for (let i = 0; i < 100; i++) {
 // Затримка кожного промісу має бути більше на 1с за затримку минулого
 // і на кожному етапі має виводитись в консоль проміжний результат.
 
+// const promise = new Promise((resolve, reject) => generateRandomNumber(resolve, reject))
+// const promise = new Promise(generateRandomNumber)
+
 /*function rngNumber(min, max) { // min and max included
 	return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-const promise = new Promise((resolve, reject) => {
+function generateRandomNumber(resolve, reject) {
 	console.log('Starting...')
 	setTimeout(() => {
 		resolve(rngNumber(1, 100))
 	}, 1000)
-}).then(data => {
+}
+
+function multiplyDataByTen(data) {
 	console.log(`Data: ${data}`)
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
 			resolve(data * 10)
 		}, 2000)
 	})
-}).then(data => {
+}
+
+function splitDataToSingleDigitArr(data) {
 	console.log(`Data: ${data}`)
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
 			resolve(data.toString().split('').map(Number))
 		}, 3000)
 	})
-}).then(data => {
+}
+
+function sortDataArr(data) {
 	console.log(`Data: ${data}`)
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
 			resolve(data.sort())
 		}, 4000)
 	})
-}).then(data => {
-	console.log(`Data: ${data}`)
-})*/
+}
+
+const promise = new Promise(generateRandomNumber)
+	.then(multiplyDataByTen)
+	.then(splitDataToSingleDigitArr)
+	.then(sortDataArr)
+	.then(data => {
+		console.log(`Data: ${data}`)
+		console.log(`Done!`)
+	})*/
 
 //5. Завдання зі статті: https://uk.javascript.info/promise-basics*/
 //5.1
@@ -135,7 +146,7 @@ delay(3000).then(() => alert('виконалось через 3 секунди')
 //5.3
 
 
-function drawCircle(cx, cy, radius) {
+/*function drawCircle(cx, cy, radius) {
 
 
 	return new Promise(resolve => {
@@ -158,7 +169,7 @@ function drawCircle(cx, cy, radius) {
 	}).then((circle) => {
 		circle.textContent = "Hello World!!!"
 	})
-}
+}*/
 
 
 
